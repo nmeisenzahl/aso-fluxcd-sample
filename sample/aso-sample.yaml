@@ -1,0 +1,22 @@
+# Creates a RG
+apiVersion: azure.microsoft.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  name: rg-sample
+spec:
+  location: westeurope
+---
+# Creates a Azure Redis Cache resource
+apiVersion: azure.microsoft.com/v1alpha1
+kind: RedisCache
+metadata:
+  name: rediscache-sample
+spec:
+  location: westeurope
+  resourceGroup: rg-sample
+  properties:
+    sku:
+      name: Basic
+      family: C
+      capacity: 1
+    enableNonSslPort: true
