@@ -2,21 +2,20 @@
 apiVersion: azure.microsoft.com/v1alpha1
 kind: ResourceGroup
 metadata:
-  name: rg-sample
+  name: sample-rg
 spec:
   location: westeurope
 ---
-# Creates a Azure Redis Cache resource
+# Creates a Storage Account
 apiVersion: azure.microsoft.com/v1alpha1
-kind: RedisCache
+kind: StorageAccount
 metadata:
-  name: rediscache-sample
+  name: sample0sa024337
 spec:
   location: westeurope
-  resourceGroup: rg-sample
-  properties:
-    sku:
-      name: Basic
-      family: C
-      capacity: 1
-    enableNonSslPort: true
+  resourceGroup: sample-rg 
+  sku:
+    name: Standard_LRS
+  kind: StorageV2
+  accessTier: Hot
+  supportsHttpsTrafficOnly: true

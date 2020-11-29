@@ -1,7 +1,7 @@
 apiVersion: azure.microsoft.com/v1alpha1
 kind: RedisCache
 metadata:
-  name: azure-vote-redis
+  name: azure-vote-redis-98779
 spec:
   location: westeurope
   resourceGroup: azure-vote-rg
