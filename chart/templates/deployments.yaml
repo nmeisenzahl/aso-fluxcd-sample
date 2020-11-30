@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-front-{{.Release.Name}}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vote-front-{{.Release.Name}}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: vote-front-{{.Release.Name}}
+    spec:
+      containers:
+      - name: azure-vote-front
+        image: neilpeterson/azure-vote-front:v3
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: vote-back-{{.Release.Name}}-redis.redis.cache.windows.net
+        - name: REDIS_PWD
+          valueFrom:
+            secretKeyRef:
+              name: vote-back-{{.Release.Name}}-redis
+              key: primaryKey
+        - name: TITLE
+          value: {{ .Values.title }}
+        - name: VOTE1VALUE
+          value: {{ .Values.value1 }}
+        - name: VOTE2VALUE
+          value: {{ .Values.value2 }}

@@ -1,0 +1,13 @@
+apiVersion: azure.microsoft.com/v1alpha1
+kind: RedisCache
+metadata:
+  name: vote-back-{{.Release.Name}}-redis
+spec:
+  location: {{ .Values.location }}
+  resourceGroup: vote-back-{{.Release.Name}}-rg
+  properties:
+    sku:
+      name: Basic
+      family: C
+      capacity: 1
+    enableNonSslPort: true

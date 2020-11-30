@@ -1,0 +1,6 @@
+apiVersion: azure.microsoft.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  name: vote-back-{{.Release.Name}}-rg
+spec:
+  location: {{ .Values.location }}
