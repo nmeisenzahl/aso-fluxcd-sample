@@ -27,13 +27,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: REDIS_NAME
-          valueFrom:
-            secretKeyRef:
-              name: azure-redis
-              key: redisCacheName
         - name: REDIS
-          value: $(REDIS_NAME).redis.cache.windows.net
+          value: azure-vote-redis-98779.redis.cache.windows.net
         - name: REDIS_PWD
           valueFrom:
             secretKeyRef:
